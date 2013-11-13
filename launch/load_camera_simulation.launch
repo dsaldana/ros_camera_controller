@@ -1,0 +1,23 @@
+<launch>
+
+	<node pkg="camera_controller" type="frame_broadcaster.py" name="fixed_broadcaster">
+		<param name="target_frame" type="string" value="usb_cam_frame" />
+	</node>
+
+	<node pkg="camera_controller" type="pose_remap.py" name="pose_remap"></node>
+
+	<node pkg="image_view" type="image_view" name="image_view">
+		<remap from="/image" to="/usb_cam_node/image_raw"/>
+	</node>
+
+	<arg name="marker_size" default="4.4" />
+	<arg name="max_new_marker_error" default="0.08" />
+	<arg name="max_track_error" default="0.2" />
+	<arg name="cam_image_topic" default="/usb_cam_node/image_raw" />
+	<arg name="cam_info_topic" default="/usb_cam_node/camera_info" />
+	<arg name="output_frame" default="/usb_cam_frame" />
+
+	<node name="ar_track_alvar" pkg="ar_track_alvar" type="individualMarkersNoKinect" respawn="false" output="screen" args="$(arg marker_size) $(arg max_new_marker_error) $(arg max_track_error) $(arg cam_image_topic) $(arg cam_info_topic) $(arg output_frame)">
+	</node>
+
+</launch>
