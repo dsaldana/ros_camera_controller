@@ -41,7 +41,7 @@
 		<param name="target_frame" type="string" value="usb_cam_frame0" />
 		<param name="x" type="double" value="0.80" />
 		<param name="y" type="double" value="1.25" />
-		<param name="z" type="double" value="2.71" />
+		<param name="z" type="double" value="2.687" />
 		<param name="qm" type="double" value="0.707" />
 		<param name="qx" type="double" value="0.707" />
 		<param name="qy" type="double" value="0.0" />
@@ -50,9 +50,9 @@
 
 	<node pkg="camera_controller" type="frame_broadcaster.py" name="fixed_broadcaster1">
 		<param name="target_frame" type="string" value="usb_cam_frame1" />
-		<param name="x" type="double" value="2.00" />
-		<param name="y" type="double" value="1.25" />
-		<param name="z" type="double" value="2.71" />
+		<param name="x" type="double" value="2.02" />
+		<param name="y" type="double" value="1.13" />
+		<param name="z" type="double" value="2.683" />
 		<param name="qm" type="double" value="0.707" />
 		<param name="qx" type="double" value="0.707" />
 		<param name="qy" type="double" value="0.0" />
