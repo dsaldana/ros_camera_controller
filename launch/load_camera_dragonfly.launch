@@ -19,10 +19,9 @@
         <node pkg="image_view" type="image_view" name="image_view">
                 <remap from="/image" to="/$(arg camera_node_name)/image_raw"/>
         </node>
--->
 
 	<node pkg="camera_controller" type="frame_broadcaster.py" name="fixed_broadcaster0">
-		<param name="target_frame" type="string" value="usb_cam_frame0" />
+		<param name="target_frame" type="string" value="usb_cam_frame" />
 		<param name="x" type="double" value="0.0" />
 		<param name="y" type="double" value="0.0" />
 		<param name="z" type="double" value="2.71" />
@@ -31,16 +30,18 @@
 		<param name="qy" type="double" value="0.0" />
 		<param name="qz" type="double" value="0.0" />
 	</node>
+-->
 
 	<!-- AR Track alvar -->
-	<arg name="marker_size" default="4.4" />
-	<arg name="max_new_marker_error" default="0.08" />
-	<arg name="max_track_error" default="0.2" />
-	<arg name="cam_image_topic" default="/camera/image_raw" />
-	<arg name="cam_info_topic" default="/camera/camera_info" />
-	<arg name="output_frame" default="/usb_cam_frame" />
+	<arg name="marker_size" default="14.7" />
+		<arg name="max_new_marker_error" default="0.08" />
+		<arg name="max_track_error" default="0.2" />
+		<arg name="cam_image_topic" default="/camera/image_raw" />
+		<arg name="cam_info_topic" default="/camera/camera_info" />
+		<arg name="output_frame" default="/usb_cam_frame" />
 
-	<arg name="bundle_files" default="$(find ar_track_alvar)/bundles/truthTableLeg.xml $(find ar_track_alvar)/bundles/table_8_9_10.xml" />
+		<node name="ar_track_alvar" pkg="ar_track_alvar" type="individualMarkersNoKinect" respawn="false" output="screen" args="$(arg marker_size) $(arg max_new_marker_error) $(arg max_track_error) $(arg cam_image_topic) $(arg cam_info_topic) $(arg output_frame)">
 
-	<node name="ar_track_alvar" pkg="ar_track_alvar" type="findMarkerBundlesNoKinect" respawn="false" output="screen" args="$(arg marker_size) $(arg max_new_marker_error) $(arg max_track_error) $(arg cam_image_topic) $(arg cam_info_topic) $(arg output_frame) $(arg bundle_files)" />
+		<remap from="/track_1/ar_pose_marker" to="/ar_pose_marker"/>
+	</node>
 </launch>
